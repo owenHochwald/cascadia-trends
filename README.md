@@ -1,13 +1,13 @@
 # Cascadia trends
 
-## Vancouver Housing Tracker
+## Seattle Housing Tracker
 
-> **A clean, interactive data exploration dashboard for Vancouver housing trends. Built with FastAPI, React, Redux, and Material UI.**
+> **A clean, interactive data exploration dashboard for Seattle housing trends. Built with FastAPI, React, Redux, and Material UI.**
 
 
 ## Why This Project?
 
-Vancouver is one of the world's most dynamic housing markets — with soaring prices, growing urbanization, and shifting demographics.  
+Seattle is one of the world's most dynamic housing markets — with soaring prices, growing urbanization, and shifting demographics.  
 This project intends to provide a clear, beautiful interface to explore real housing trends, and identify patterns.
 
 ---
@@ -36,7 +36,7 @@ This project intends to provide a clear, beautiful interface to explore real hou
 ---
 
 ## User Stories
-- As a user, I want to see a quick overview of housing prices across Vancouver so that I can understand general market trends.
+- As a user, I want to see a quick overview of housing prices across Seattle so that I can understand general market trends.
 
 - As a user, I want to filter housing data by city or neighborhood so that I can explore specific areas.
 
