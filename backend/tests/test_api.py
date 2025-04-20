@@ -1,0 +1,1 @@
+# skeleton for the fastapi pytests
