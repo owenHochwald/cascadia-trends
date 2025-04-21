@@ -28,7 +28,12 @@ async def get_trends(
     
 
 @router.get("/scatter")
-async def get_scatter():
+async def get_scatter(
+    min_sqft: float | None = None,
+    max_sqft: float | None = None,
+    min_price: float | None = None,
+    max_price: float | None = None,
+):
     return []
     
 
