@@ -3,7 +3,6 @@ from app.main import app
 
 client = TestClient(app)
 
-# Happy Path Tests
 def test_summary_no_filters():
     response = client.get("/housing/summary")
     assert response.status_code == 200
@@ -17,8 +16,6 @@ def test_summary_min_price_filter():
     assert response.status_code == 200
     data = response.json()
     assert "average_price" in data
-    # We cannot guarantee that all prices are >= min_price because avg is an average,
-    # but at least we assert structure exists.
 
 def test_summary_max_price_filter():
     response = client.get("/housing/summary?max_price=1000000")
