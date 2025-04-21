@@ -5,9 +5,16 @@ router = APIRouter(
     tags=["housing"]
 )
 
-
+# example request: GET /housing/summary?min_price=300000&max_price=700000&bedrooms=3,4&waterfront=1
 @router.get("/summary")
-async def get_summary():
+async def get_summary(
+    min_price: float | None = None,
+    max_price: float | None = None,
+    bedroom_category: str | None = None,
+    min_sqft: float | None = None,
+    max_sqft: float | None = None,
+    year_built: float | None = None,
+):
     return []
 
 @router.get("/trends")
