@@ -1,5 +1,4 @@
 from fastapi.testclient import TestClient
-from app.routers.housing import router as housing_router
 from app.main import app
 
 

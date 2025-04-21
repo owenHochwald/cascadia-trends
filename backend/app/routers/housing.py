@@ -18,7 +18,12 @@ async def get_summary(
     return []
 
 @router.get("/trends")
-async def get_trends():
+async def get_trends(
+    start_year: int | None = None,
+    end_year: int | None = None,
+    start_month: int | None = None,
+    end_month: int | None = None
+):
     return []
     
 
