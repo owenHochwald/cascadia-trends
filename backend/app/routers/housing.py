@@ -38,11 +38,18 @@ async def get_scatter(
     
 
 @router.get("/distribution")
-async def get_price_distribution():
+async def get_price_distribution(
+    min_sqft: float | None = None,
+    max_sqft: float | None = None,
+):
     return []
     
 
 @router.get("/bedrooms")
-async def get_bedroom_distribution():
+async def get_bedroom_distribution(
+    min_price: float | None = None,
+    max_price: float | None = None,
+    bedroom_category: str | None = None,
+):
     return []
     
