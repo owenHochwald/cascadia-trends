@@ -34,3 +34,17 @@ def get_summary(**filters):
         "median_sqft": round(df["sqft_living"].median(), 2) if not df.empty else 0,
         "total_sales": len(df)
     }
+    
+def get_bedrooms(**filters):
+    df = load_data()
+    df = apply_filters(df, **filters)
+    
+    counts = df["bedroom_category"].value_counts()
+
+    
+    return {
+        "small": int(counts.get("small", 0)),
+        "medium": int(counts.get("medium", 0)),
+        "large": int(counts.get("large", 0)),
+        "total": len(df)
+    }

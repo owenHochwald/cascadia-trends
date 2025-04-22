@@ -71,5 +71,20 @@ async def get_bedroom_distribution(
     max_price: float | None = None,
     bedroom_category: str | None = None,
 ):
-    return []
+    try:
+        min_price = float(min_price) if min_price is not None else None
+        max_price = float(max_price) if max_price is not None else None
+    except ValueError:
+        return {
+            "small": 0,
+            "medium": 0,
+            "large": 0,
+            "total": 0
+        }
+    
+    return housing_service.get_bedrooms(
+        min_price=min_price,
+        max_price=max_price,
+        bedroom_category=bedroom_category
+    )
     
