@@ -44,7 +44,20 @@ async def get_trends(
     start_month: int | None = None,
     end_month: int | None = None
 ):
-    return []
+    
+    if start_year and end_year and start_year > end_year:
+        return []
+    if start_month and end_month and (start_month < 1 or end_month > 12):
+        return []
+    if start_month and end_month and start_month > end_month:
+        return []
+    
+    return housing_service.get_trends(
+        start_year=start_year,
+        end_year=end_year,
+        start_month=start_month,
+        end_month=end_month
+    )
     
 
 @router.get("/scatter")

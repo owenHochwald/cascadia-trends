@@ -12,11 +12,23 @@ def apply_filters(
     bedroom_category: Optional[str] = None,
     min_sqft: Optional[float] = None,
     max_sqft: Optional[float] = None,
+    start_year: Optional[int] = None,
+    end_year: Optional[int] = None,
+    start_month: Optional[int] = None,
+    end_month: Optional[int] = None
 ) -> pd.DataFrame:
     if min_price is not None:
         df = df[df['price'] >= min_price]
     if max_price is not None:
         df = df[df['price'] <= max_price]
+    if start_year is not None:
+        df = df[df['year'] >= start_year]
+    if end_year is not None:
+        df = df[df['year'] <= end_year]
+    if start_month is not None:
+        df = df[df['month'] >= start_month]
+    if end_month is not None:
+        df = df[df['month'] <= end_month]
     if bedroom_category is not None:
         df = df[df['bedroom_category'] == bedroom_category]
     if min_sqft is not None:
@@ -40,7 +52,6 @@ def get_bedrooms(**filters):
     df = apply_filters(df, **filters)
     
     counts = df["bedroom_category"].value_counts()
-
     
     return {
         "small": int(counts.get("small", 0)),
@@ -48,3 +59,23 @@ def get_bedrooms(**filters):
         "large": int(counts.get("large", 0)),
         "total": len(df)
     }
+    
+def get_trends(**filters):
+    df = load_data()
+    df = apply_filters(df, **filters)
+    
+    result = (
+        df.groupby(["year", "month"])
+        .agg(
+            average_price=("price", "mean"),
+            median_sqft=("sqft_living", "median"),
+            average_price_per_sqft=("price_per_sqft", "mean"),
+            total_sales=("bedroom_category", "count"),
+        )
+        .reset_index()
+        .to_dict(orient="records")
+    )
+
+    return result
+    
+    

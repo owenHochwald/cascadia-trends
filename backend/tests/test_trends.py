@@ -40,10 +40,12 @@ def test_trends_flipped_year_range():
     assert data == [] 
     
 def test_trends_start_year_too_early():
+    # be able to retrieve data from 2014 to 2015 even if the start year is 2013
     response = client.get("/housing/trends?start_year=2013&end_year=2015")
     assert response.status_code == 200
     data = response.json()
-    assert data == [] 
+    assert data != [] 
+    assert len(data) > 0
     
 def test_trends_invalid_months():
     response = client.get("/housing/trends?start_year=2014&end_year=2015&start_month=13&end_month=15")
