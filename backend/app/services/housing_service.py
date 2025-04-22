@@ -2,7 +2,7 @@ import pandas as pd
 from typing import Optional
 
 def load_data() -> pd.DataFrame:
-    df = pd.read_csv("./../data/houses.csv")
+    df = pd.read_csv("./data/houses.csv")
     return df
 
 def apply_filters(
