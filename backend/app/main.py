@@ -2,7 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import housing
 
-app = FastAPI()
+app = FastAPI(
+    title="Cascadia Housing Trends API",
+    description="Explore and analyze housing trends for King County, WA",
+    version="1.0.0"
+)
 
 origins = [
     "http://localhost",
