@@ -18,7 +18,7 @@ This project intends to provide a clear, beautiful interface to explore real hou
 |:--------|:--------|:-----------|:---------------|
 | React | FastAPI | Pandas | Docker |
 | Redux Toolkit | Uvicorn | CSV Dataset (Real Estate) | Render (Backend Hosting) |
-| Material UI | Pytest (TDD) | Axios | Vercel (Frontend Hosting) |
+| Material UI | Pytest (TDD - 92% coverage) | Axios | Vercel (Frontend Hosting) |
 
 ---
 
