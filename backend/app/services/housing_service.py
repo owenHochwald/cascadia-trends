@@ -85,6 +85,9 @@ def get_size_distribution(**filters):
     return df["sqft_living"].sample(1000, random_state=42).tolist()
 
 def get_price_distribution(**filters):
-    return []
+    df = load_data()
+    df = apply_filters(df, **filters)
+    
+    return df["price"].sample(1000, random_state=42).tolist()
 
     

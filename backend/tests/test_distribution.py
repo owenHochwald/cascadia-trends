@@ -34,10 +34,7 @@ def test_price_distribution_with_filters():
     
 def test_price_distribution_bad_filter():
     response = client.get("/housing/price-distribution?min_price=abc&max_price=xyz")
-    assert response.status_code == 200 
-    data = response.json()
-    assert isinstance(data, dict)
-    assert len(data) == 0
+    assert response.status_code == 422 
 
 
 
