@@ -79,6 +79,16 @@ async def get_size_distribution(
         min_sqft=float(min_sqft) if min_sqft is not None else None,
         max_sqft=float(max_sqft) if max_sqft is not None else None
     )
+    
+@router.get("/price-distribution")
+async def get_price_distribution(
+    min_price: float | None = None,
+    max_price: float | None = None,
+):
+    return housing_service.get_price_distribution(
+        min_price=float(min_price) if min_price is not None else None,
+        max_price=float(max_price) if max_price is not None else None
+    )
 
     
 
