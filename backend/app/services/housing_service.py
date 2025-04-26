@@ -78,4 +78,9 @@ def get_trends(**filters):
 
     return result
     
+def get_size_distribution(**filters):
+    df = load_data()
+    df = apply_filters(df, **filters)
+    
+    return df["sqft_living"].sample(1000, random_state=42).tolist()
     

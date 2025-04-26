@@ -1,22 +1,18 @@
 from fastapi.testclient import TestClient
 from app.main import app
-
 client = TestClient(app) 
 
-def test_distribution_no_filters():
-    response = client.get("/housing/distribution")
+def test_size_distribution_no_filters():
+    response = client.get("/housing/size-distribution")
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
-    assert isinstance(data[0], (int, float))
+    assert len(data) > 0  
 
-def test_distribution_filtered_by_sqft():
-    response = client.get("/housing/distribution?min_sqft=500&max_sqft=3000")
+def test_size_distribution_filtered_by_sqft():
+    response = client.get("/housing/size-distribution?min_sqft=500&max_sqft=3000")
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
-    if len(data) > 0:
-        for price in data:
-            assert isinstance(price, (int, float))
-    else:
-        assert data == []
+    assert len(data) > 0  
+    assert all(item >= 500 and item <= 3000 for item in data)

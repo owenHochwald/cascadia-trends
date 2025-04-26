@@ -70,12 +70,16 @@ async def get_scatter(
     return []
     
 
-@router.get("/distribution")
-async def get_price_distribution(
+@router.get("/size-distribution")
+async def get_size_distribution(
     min_sqft: float | None = None,
     max_sqft: float | None = None,
 ):
-    return []
+    return housing_service.get_size_distribution(
+        min_sqft=float(min_sqft) if min_sqft is not None else None,
+        max_sqft=float(max_sqft) if max_sqft is not None else None
+    )
+
     
 
 @router.get("/bedrooms")
