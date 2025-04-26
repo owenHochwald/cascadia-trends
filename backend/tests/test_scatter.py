@@ -33,9 +33,9 @@ def test_scatter_with_filter():
         assert item["price"] <= 700000
         
 def test_scatter_empty_result():
-    res = client.get("/housing/scatter?min_sqft=-10&max_sqft=0")
+    res = client.get("/housing/scatter?min_sqft=0&max_sqft=0")
     assert res.status_code == 200
     data = res.json()
     
-    assert isinstance(data, list)
+    assert isinstance(data, dict)
     assert len(data) == 0

@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from typing import Optional
 
 def load_data() -> pd.DataFrame:
@@ -90,4 +91,17 @@ def get_price_distribution(**filters):
     
     return df["price"].sample(1000, random_state=42).tolist()
 
-    
+def get_scatter(**filters):
+    df = load_data()
+    df = apply_filters(df, **filters)
+
+    if df.empty:
+        return {}
+    df = df[["price", "bedroom_category", "sqft_living"]].replace([np.inf, -np.inf], np.nan).dropna()
+
+    if df.empty:
+        return {}
+
+    return df[["price", "bedroom_category", "sqft_living"]].sample(
+        min(len(df), 1000), random_state=42
+    ).to_dict(orient="records")

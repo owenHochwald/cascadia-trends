@@ -67,7 +67,10 @@ async def get_scatter(
     min_price: float | None = None,
     max_price: float | None = None,
 ):
-    return []
+    data = housing_service.get_scatter(
+        min_sqft=min_sqft, max_sqft=max_sqft, min_price=min_price, max_price=max_price
+    )
+    return data if data else {}
     
 
 @router.get("/size-distribution")
