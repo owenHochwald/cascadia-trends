@@ -1,13 +1,14 @@
 from fastapi import APIRouter
 from app.services import housing_service
 from typing import Optional
+from app.models.models import *
 
 router = APIRouter(
     prefix="/housing",
     tags=["housing"]
 )
 
-@router.get("/summary")
+@router.get("/summary", response_model=SummaryResponse)
 async def get_summary(
     min_price: Optional[str] = None,
     max_price: Optional[str] = None,
