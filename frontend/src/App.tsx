@@ -2,6 +2,8 @@ import "./App.css"
 import SummaryChart from "./features/summary/SummaryChart"
 import TrendsChart from "./features/trends/TrendsChart"
 import ScatterChartComponent from "./features/scatter/ScatterChart"
+import SizeDistributionChart from "./features/size-distribtion/SizeDistributionChart"
+import PriceDistributionChart from "./features/price/priceDistChart"
 export const App = () => (
     <div className="App">
         <header className="App-header">
@@ -9,6 +11,8 @@ export const App = () => (
             <SummaryChart />
             <TrendsChart />
             <ScatterChartComponent />
+            <PriceDistributionChart />
+            <SizeDistributionChart />
         </header>
     </div>
 )
