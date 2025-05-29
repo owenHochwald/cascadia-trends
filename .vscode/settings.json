@@ -5,7 +5,7 @@
         "markdown": false,
         "scminput": false,
         "java": false,
-        "typescript": false
+        "typescript": true
     },
     "python.testing.pytestArgs": [
         "backend"

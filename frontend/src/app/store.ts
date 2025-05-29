@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from '../features/counter/counterSlice';
 import summaryReducer from '../features/summary/summarySlice';
+import trendsReducer from '../features/trends/trendsSlice';
+import scatterReducer from '../features/scatter/scatterSlice';
 
 export const store = configureStore({
     reducer: {
-        counter: counterReducer,
         summary: summaryReducer,
+        trends: trendsReducer,
+        scatter: scatterReducer,
     }
 });
 
