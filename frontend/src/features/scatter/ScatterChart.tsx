@@ -35,7 +35,7 @@ const ScatterChartComponent = () => {
         if (!groupedData[item.bedroom_category]) {
             groupedData[item.bedroom_category] = [];
         }
-        groupedData[item.bedroom_category].push(item);
+        groupedData[item.bedroom_category]?.push(item);
     });
 
     const bedroomCategories = Object.keys(groupedData);
@@ -65,7 +65,7 @@ const ScatterChartComponent = () => {
                         <Scatter
                             key={category}
                             name={category}
-                            data={groupedData[category]}
+                            data={groupedData[category]? groupedData[category] : []}
                             fill={COLORS[index % COLORS.length]}
                         />
                     ))}
