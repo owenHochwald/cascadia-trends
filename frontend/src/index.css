@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+}
 
 body {
   margin: 0;
@@ -8,9 +11,30 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(3, 7, 18);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 code {
   font-family:
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Prevent content shift during loading */
+.recharts-wrapper {
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

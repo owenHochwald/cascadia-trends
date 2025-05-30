@@ -5,6 +5,7 @@ import scatterReducer from '../features/scatter/scatterSlice';
 import sizeReducer from '../features/size-distribtion/sizeSlice';
 import priceReducer from '../features/price/priceDistSlice';
 import bedroomReducer from '../features/bedrooms/bedroomSlice';
+import filterReducer from '../features/filters/filterSlice';
 
 export const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
         scatter: scatterReducer,
         sizeDist: sizeReducer,
         priceDist: priceReducer,
-        bedrooms: bedroomReducer
+        bedrooms: bedroomReducer,
+        filters: filterReducer
     }
 });
 
