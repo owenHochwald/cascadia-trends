@@ -1,0 +1,53 @@
+/* Chart Animation Styles */
+.chart-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.chart-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+}
+
+.chart-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chart-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+}
+
+/* Chart Content Animation */
+.chart-content {
+  transition: all 500ms ease-in-out;
+}
+
+/* Bar Chart Animation */
+.recharts-bar-rectangle {
+  transition: all 500ms ease-in-out;
+}
+
+/* Pie Chart Animation */
+.recharts-sector {
+  transition: all 500ms ease-in-out;
+}
+
+/* Line/Area Chart Animation */
+.recharts-line-curve,
+.recharts-area-area {
+  transition: all 500ms ease-in-out;
+}
+
+/* Tooltip Animation */
+.recharts-tooltip-wrapper {
+  transition: transform 200ms ease-in-out;
+}
+
+/* Axis Animation */
+.recharts-cartesian-axis-tick {
+  transition: transform 500ms ease-in-out;
+}

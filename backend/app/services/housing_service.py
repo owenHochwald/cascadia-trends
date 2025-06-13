@@ -6,6 +6,31 @@ def load_data() -> pd.DataFrame:
     df = pd.read_csv("./data/houses.csv")
     return df
 
+def sample_data(df: pd.DataFrame, max_samples: int = 1000) -> pd.DataFrame:
+    """Sample data while preserving distribution of key features."""
+    if len(df) <= max_samples:
+        return df
+        
+    # Stratify by bedroom category and year to maintain distribution
+    strata = df['bedroom_category'].astype(str) + '_' + df['year'].astype(str)
+    
+    # Calculate sample size per stratum
+    n_strata = len(strata.unique())
+    samples_per_stratum = max(1, max_samples // n_strata)
+    
+    sampled_df = df.groupby(strata).apply(
+        lambda x: x.sample(
+            n=min(len(x), samples_per_stratum),
+            random_state=42
+        )
+    ).reset_index(drop=True)
+    
+    # If we still have too many samples, take a random subset
+    if len(sampled_df) > max_samples:
+        sampled_df = sampled_df.sample(max_samples, random_state=42)
+    
+    return sampled_df
+
 def apply_filters(
     df: pd.DataFrame,
     min_price: Optional[float] = None,
@@ -65,6 +90,7 @@ def get_trends(**filters):
     df = load_data()
     df = apply_filters(df, **filters)
     
+    # For trends, we don't sample as we need accurate aggregates
     result = (
         df.groupby(["year", "month"])
         .agg(
@@ -82,14 +108,14 @@ def get_trends(**filters):
 def get_size_distribution(**filters):
     df = load_data()
     df = apply_filters(df, **filters)
-    
-    return df["sqft_living"].sample(1000, random_state=42).tolist()
+    sampled_df = sample_data(df, max_samples=750)
+    return sampled_df["sqft_living"].tolist()
 
 def get_price_distribution(**filters):
     df = load_data()
     df = apply_filters(df, **filters)
-    
-    return df["price"].sample(1000, random_state=42).tolist()
+    sampled_df = sample_data(df, max_samples=750)
+    return sampled_df["price"].tolist()
 
 def get_scatter(**filters):
     df = load_data()
@@ -97,11 +123,11 @@ def get_scatter(**filters):
 
     if df.empty:
         return {}
+        
     df = df[["price", "bedroom_category", "sqft_living"]].replace([np.inf, -np.inf], np.nan).dropna()
 
     if df.empty:
         return {}
 
-    return df[["price", "bedroom_category", "sqft_living"]].sample(
-        min(len(df), 1000), random_state=42
-    ).to_dict(orient="records")
+    sampled_df = sample_data(df, max_samples=500)
+    return sampled_df[["price", "bedroom_category", "sqft_living"]].to_dict(orient="records")

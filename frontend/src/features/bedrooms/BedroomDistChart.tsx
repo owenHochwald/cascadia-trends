@@ -3,6 +3,7 @@ import { AppDispatch, RootState } from "../../app/store";
 import { useEffect } from "react";
 import { fetchBedrooms } from "./bedroomSlice";
 import { useCrossFiltering } from "../../app/hooks";
+import '../../styles/animations.css';
 import {
     ResponsiveContainer,
     PieChart,
@@ -77,7 +78,7 @@ const BedroomChart = () => {
     }));
 
     return (
-        <div className="h-full">
+        <div className="h-full chart-content">
             <h2 className="text-xl font-semibold mb-6 text-gray-100">Property Size Distribution</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[400px]">
                 {/* Pie Chart */}
@@ -93,6 +94,7 @@ const BedroomChart = () => {
                                 outerRadius="90%"
                                 fill="#8884d8"
                                 dataKey="value"
+                                isAnimationActive={true}
                             >
                                 {pieData.map((entry, index) => (
                                     <Cell 
@@ -107,7 +109,10 @@ const BedroomChart = () => {
                                                 ? undefined
                                                 : entry.name.toLowerCase()
                                         })}
-                                        style={{ cursor: 'pointer' }}
+                                        style={{ 
+                                            cursor: 'pointer', 
+                                            transition: 'opacity 500ms ease-in-out'
+                                        }}
                                     />
                                 ))}
                             </Pie>
@@ -115,7 +120,8 @@ const BedroomChart = () => {
                                 contentStyle={{
                                     backgroundColor: '#1F2937',
                                     borderColor: '#374151',
-                                    color: '#F9FAFB'
+                                    color: '#F9FAFB',
+                                    transition: 'all 200ms ease-in-out'
                                 }}
                             />
                         </PieChart>
@@ -147,7 +153,8 @@ const BedroomChart = () => {
                                 contentStyle={{
                                     backgroundColor: '#1F2937',
                                     borderColor: '#374151',
-                                    color: '#F9FAFB'
+                                    color: '#F9FAFB',
+                                    transition: 'all 200ms ease-in-out'
                                 }}
                                 formatter={(value: any) => [`${value}%`, 'Distribution']}
                             />
@@ -161,6 +168,7 @@ const BedroomChart = () => {
                                         : data.name.toLowerCase()
                                 })}
                                 style={{ cursor: 'pointer' }}
+                                isAnimationActive={true}
                             >
                                 {barData.map((entry, index) => (
                                     <Cell 
@@ -170,6 +178,9 @@ const BedroomChart = () => {
                                                 entry.name.toLowerCase() !== filters.bedroomCategory
                                                     ? 0.3 
                                                     : 1}
+                                        style={{ 
+                                            transition: 'opacity 500ms ease-in-out',
+                                        }}
                                     />
                                 ))}
                             </Bar>

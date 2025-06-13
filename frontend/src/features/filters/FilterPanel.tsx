@@ -20,23 +20,42 @@ const FilterPanel = () => {
     const dispatch = useAppDispatch();
     const filters = useAppSelector(state => state.filters);
 
-    const formatPrice = (price: number) => 
+    const formatPrice = useCallback((price: number) => 
         new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
             maximumFractionDigits: 0
-        }).format(price);
+        }).format(Math.round(price / 1000) * 1000)
+    , []);
+
+    const formatSqft = useCallback((sqft: number) => 
+        new Intl.NumberFormat('en-US', {
+            maximumFractionDigits: 0
+        }).format(Math.round(sqft / 100) * 100)
+    , []);
 
     const updatePriceRange = useCallback((range: FilterRange) => {
+        const [min, max] = range;
+        // Round to nearest thousand
+        const roundedRange: FilterRange = [
+            Math.round(min / 1000) * 1000,
+            Math.round(max / 1000) * 1000
+        ];
         dispatch(updateFilters({
-            priceRange: range,
+            priceRange: roundedRange,
             sourceChart: 'filter-panel'
         }));
     }, [dispatch]);
 
     const updateSqftRange = useCallback((range: FilterRange) => {
+        const [min, max] = range;
+        // Round to nearest hundred
+        const roundedRange: FilterRange = [
+            Math.round(min / 100) * 100,
+            Math.round(max / 100) * 100
+        ];
         dispatch(updateFilters({
-            sqftRange: range,
+            sqftRange: roundedRange,
             sourceChart: 'filter-panel'
         }));
     }, [dispatch]);
@@ -113,7 +132,7 @@ const FilterPanel = () => {
                                 className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
                             />
                             <div className="text-sm text-gray-400 mt-1">
-                                Min: {filters.sqftRange[0]} sqft
+                                Min: {formatSqft(filters.sqftRange[0])} sqft
                             </div>
                         </div>
                         <div>
@@ -127,7 +146,7 @@ const FilterPanel = () => {
                                 className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
                             />
                             <div className="text-sm text-gray-400 mt-1">
-                                Max: {filters.sqftRange[1]} sqft
+                                Max: {formatSqft(filters.sqftRange[1])} sqft
                             </div>
                         </div>
                     </div>
